@@ -1,0 +1,36 @@
+name: Deploy to Azure AKS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Log in to Azure CLI
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Build Docker image
+      run: |
+        docker build -t myexampleacr.azurecr.io/hola-mundo-api:latest .
+     
+    - name: Push Docker image to ACR
+      run: |
+        az acr login --name myexampleacr  # Reutiliza tu ACR
+        docker push myexampleacr.azurecr.io/hola-mundo-api:latest
+
+    - name: Set up AKS credentials
+      run: |
+        az aks get-credentials --resource-group myResourceGroup --name <nombre-del-cluster> # Configura kubectl para AKS usando el grupo de recursos y nombre de tu clúster
+
+    - name: Deploy to AKS
+      run: |
+        kubectl apply -f deployment.yml

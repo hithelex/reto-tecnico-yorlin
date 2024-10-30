@@ -1,16 +1,20 @@
-# Usar una imagen base de Node.js
+# Usa una imagen base de Node.js (en este caso, la versión 18-alpine para que sea liviana)
 FROM node:18-alpine
 
-# Crear y definir el directorio de trabajo
+# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar archivos al contenedor
+# Copia los archivos package.json y package-lock.json al contenedor
 COPY package*.json ./
+
+# Instala las dependencias
 RUN npm install
+
+# Copia el resto del código de la API al contenedor
 COPY . .
 
-# Exponer el puerto que usará la API
+# Expone el puerto en el que se ejecutará la API
 EXPOSE 3000
 
-# Comando para iniciar la API
-CMD ["node", "index.js"]
+# Comando para iniciar la aplicación
+CMD ["node", "app.js"]

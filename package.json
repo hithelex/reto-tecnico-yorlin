@@ -1,0 +1,19 @@
+{
+  "name": "prueba-tecnica-yorlin",
+  "version": "1.0.0",
+  "description": "TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://edinhuingoygnacio@dev.azure.com/edinhuingoygnacio/primer-proyecto/_git/prueba-tecnica-yorlin"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
